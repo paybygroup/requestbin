@@ -37,7 +37,7 @@ class WSGIRawBody(object):
 app = Flask(__name__)
 
 if os.environ.get('ENABLE_CORS', config.ENABLE_CORS):
-    cors = CORS(app, resources={r"*": {"origins": os.environ.get('CORS_ORIGINS', config.CORS_ORIGINS)}})
+    cors = CORS(app, resources={r"*": {"origins": os.environ.get('CORS_ORIGINS', config.CORS_ORIGINS), "supports_credentials": os.environ.get('CORS_SUPPORTS_CREDENTIALS', config.CORS_SUPPORTS_CREDENTIALS)}})
 
 from werkzeug.contrib.fixers import ProxyFix
 app.wsgi_app = WSGIRawBody(ProxyFix(app.wsgi_app))
